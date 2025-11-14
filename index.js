@@ -1,8 +1,11 @@
 const http = require('http');
+const authenticateUser = require('./auth');
 
 const server = http.createServer((req, res) => {
-  res.writeHead(200, {'Content-Type': 'text/plain'});
-  res.end('Hello! Your Node.js server is running.');
+  const result = authenticateUser("admin", "1234");
+
+  res.writeHead(200, { 'Content-Type': 'text/plain' });
+  res.end("Auth Check: " + result);
 });
 
 server.listen(3000, () => {
