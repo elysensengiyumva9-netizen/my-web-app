@@ -1,13 +1,16 @@
 const http = require('http');
-const authenticateUser = require('./auth');
-
 const server = http.createServer((req, res) => {
-  const result = authenticateUser("admin", "1234");
-
-  res.writeHead(200, { 'Content-Type': 'text/plain' });
-  res.end("Auth Check: " + result);
+  if (req.url === '/about') {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'text/plain');
+    res.end('About Page\n');
+  } else {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'text/plain');
+    res.end('Hello, World!\n');
+  }
 });
-
 server.listen(3000, () => {
-  console.log('Server running on http://localhost:3000');
+  console.log('Server running at http://localhost:3000/');
 });
+
